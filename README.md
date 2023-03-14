@@ -18,32 +18,27 @@ Desafio – VirteX - Desenvolvimento
         "devStart": "nodemon index.js",
 
 - Criar DB
-- CREATE DATABASE IF NOT EXISTS employeesystem;
-- USE employeesystem;
+CREATE DATABASE IF NOT EXISTS virtex_dev;
+USE virtex_dev;
 
-CREATE TABLE `employeesystem`.`employees` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `age` INT(3) NOT NULL,
-  `country` VARCHAR(45) NOT NULL,
-  `position` VARCHAR(100) NOT NULL,
-  `wage` INT(5) NOT NULL,
-  PRIMARY KEY (`id`));
+CREATE TABLE IF NOT EXISTS ont (
+  ont_id INT NOT NULL AUTO_INCREMENT,
+  slot VARCHAR(100) NOT NULL,
+  porta VARCHAR(100) NOT NULL,
+  sn VARCHAR(100) NOT NULL,
+  state VARCHAR(100) NOT NULL,
+  PRIMARY KEY (ont_id));
 
-  CREATE TABLE IF NOT EXISTS employees (
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  age INT(3) NOT NULL,
-  country VARCHAR(45) NOT NULL,
-  position VARCHAR(100) NOT NULL,
-  wage INT(5) NOT NULL,
-  PRIMARY KEY (id));
-
-- INSERT INTO `employeesystem`.`employees` (`name`, `age`, `country`, `position`, `wage`) VALUES ('Lucas', '31', 'Brasil', 'Fired', '5000');
+INSERT INTO ont ('slot', 'porta', 'sn', 'state') VALUES ('gpon-onu_1/1/1:1', '1(GPON)', '444753542140AF37', 'online');
 
 
 # Criando Docker container do nodejs + express e Mysql
 ## Executando
+
+docker run --name mysql-container -d -v /var/lib/mysql -p 3308:3306 -e MYSQL_ROOT_PASSWORD=docker -e MYSQL_DATABASE=docker -e MYSQL_USER=docker -e MYSQL_PASSWORD=docker mysql:5.7
+
+docker exec -i mysql-container mysql -udocker -pdocker docker < script.sql
+
 - Para verificar se está tudo certo vamos rodar o comando:
 docker build -t virtex_dev_image .
 
