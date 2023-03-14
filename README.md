@@ -1,10 +1,8 @@
 # desafio_virtex_dev
 Desafio – VirteX - Desenvolvimento
 
-# crud_node_react
-
-# Criar Front End
-npx create-react-app .
+# Criar Front End Client
+- npx create-react-app .
 
 # Criar Back End
 - npm init
