@@ -1,0 +1,2 @@
+##  Ignorar algumas coisas que não precisamos copiar para o container
+node_modules

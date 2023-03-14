@@ -43,9 +43,28 @@ CREATE TABLE `employeesystem`.`employees` (
 
 
 # Criando Docker container do nodejs + express e Mysql
-- Criar uma imagem com base no arquivo Dockerfile 
-- docker build -t node-docker-image .
-- docker images
+## Executando
+- Para verificar se está tudo certo vamos rodar o comando:
+docker build -t virtex_dev_image .
+
+docker images
+
+- Execute o comando abaixo para criar o container:
+docker run -p 3000:3000 -d nome-para-o-container
+
+docker ps
+
+- Para parar, iniciar e ver Logs do container podemos executar os comandos abaixo:
+- Parar o container:
+docker stop ID
+- Iniciar o container
+docker start ID
+- Ver os logs do que está acontecendo no container:
+docker logs ID
+
+- Pode rodar em background e liberar o terminal
+docker-compose up -d
+
 
 - Criar um container com base na imagem
 - docker run -d -p 3001:3001 --name node-docker ef6d3f76e282 

@@ -1,0 +1,26 @@
+version: "0.1"
+
+services: 
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: yarn start
+    ports: 
+      - 3000:3000
+    volumes: 
+      - .:/src/app
+      - '/app/node_modules'
+    depends_on: 
+      - mysql_server
+  
+  mysql_server:
+    image: mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_server:/var/lib/mysql
+    restart: always
+
+volumes:
+  mysql_server:
