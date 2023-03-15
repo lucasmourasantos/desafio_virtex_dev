@@ -2,6 +2,11 @@
 Desafio – VirteX - Desenvolvimento
 ===================================================================================================================
 
+Desenvolvido as etapas, com exceções:
+Não consegui integrar o back-end com o front-end no container docker, mas fiz um deploy completo do back-end com BD criado e funcionando um CRUD completo.
+
+Front-end rodando separadamente, local.
+
 # Criar Front End Client
 - npx create-react-app .
 
