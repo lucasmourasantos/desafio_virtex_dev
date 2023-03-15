@@ -1,12 +1,96 @@
 const express = require("express");
-const mysql = require("mysql");
-
+const mysql = require("mysql2");
+const cors = require("cors");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hi Docker!!!");
+/* const mysqlConfig = {
+  host: "mysql_server",
+  user: "virtex",
+  password: "secret",
+  database: "virtex_devops"
+}
+
+const con = null */
+
+const db = mysql.createConnection({
+  user: "virtex",
+  host: "mysql_server",
+  password: "secret",
+  database: "virtex_devops",
 });
 
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
+
+app.get('/connect', function (req, res) {
+  //con =  mysql.createConnection(mysqlConfig);
+  db.connect(function(err) {
+    if (err) throw err;
+    res.send('connected')
+  });
+})
+
+app.get('/create-db', function (req, res) {
+  db.connect(function(err) {
+    if (err) throw err;
+    const sql = `
+    CREATE DATABASE IF NOT EXISTS virtex_devops;
+  `;
+  db.query(sql, function (err, result) {
+      if (err) throw err;
+      res.send("DB created");
+    });
+  });
+})
+
+app.get('/create-table', function (req, res) {
+  db.connect(function(err) {
+    if (err) throw err;
+    const sql = `
+    CREATE TABLE IF NOT EXISTS ont (
+      ont_id INT NOT NULL AUTO_INCREMENT,
+      slot VARCHAR(100) NOT NULL,
+      porta VARCHAR(100) NOT NULL,
+      sn VARCHAR(100) NOT NULL,
+      state VARCHAR(100) NOT NULL,
+      PRIMARY KEY (ont_id));
+  `;
+  db.query(sql, function (err, result) {
+      if (err) throw err;
+      res.send("numbers table created");
+    });
+  });
+})
+
+app.get('/insert', function (req, res) {
+  //const number = Math.round(Math.random() * 100)
+  db.connect(function(err) {
+    if (err) throw err;
+    const sql = `INSERT INTO ont (slot, porta, sn, state) VALUES ('gpon-onu_1/1/1:1', '1(GPON)', '444753542140AF37', 'online');`
+    db.query(sql, function (err, result) {
+      if (err) throw err;
+      res.send(`Data inserted into table`)
+    });
+  })
+})
+
+app.get('/fetch', function (req, res) {
+  db.connect(function(err) {
+    if (err) throw err;
+    const sql = `SELECT * FROM ont`
+    db.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      res.send(JSON.stringify(result))
+    });
+  });
+})
+
+/* app.get("/", (req, res) => {
+  res.send("Hi Docker!!!");
+});
+ */
 /* const connection = mysql.createConnection({
   user: "root",
   host: "localhost",
