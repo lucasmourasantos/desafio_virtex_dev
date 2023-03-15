@@ -19,20 +19,19 @@ const db = mysql.createConnection({
   database: "virtex_devops",
 });
 
-// respond with "hello world" when a GET request is made to the homepage
+
 app.get('/', function (req, res) {
-  res.send('hello world')
+    res.send('Tudo funcionando.')
 })
 
-app.get('/connect', function (req, res) {
-  //con =  mysql.createConnection(mysqlConfig);
+app.get('/conectar', function (req, res) {
   db.connect(function(err) {
     if (err) throw err;
-    res.send('connected')
+    res.send('Conectado.')
   });
 })
 
-app.get('/create-db', function (req, res) {
+app.get('/criar-db', function (req, res) {
   db.connect(function(err) {
     if (err) throw err;
     const sql = `
@@ -40,12 +39,12 @@ app.get('/create-db', function (req, res) {
   `;
   db.query(sql, function (err, result) {
       if (err) throw err;
-      res.send("DB created");
+      res.send("DB criado");
     });
   });
 })
 
-app.get('/create-table', function (req, res) {
+app.get('/criar-tabela', function (req, res) {
   db.connect(function(err) {
     if (err) throw err;
     const sql = `
@@ -59,24 +58,24 @@ app.get('/create-table', function (req, res) {
   `;
   db.query(sql, function (err, result) {
       if (err) throw err;
-      res.send("numbers table created");
+      res.send("Tabela criada");
     });
   });
 })
 
-app.get('/insert', function (req, res) {
+app.get('/inserir', function (req, res) {
   //const number = Math.round(Math.random() * 100)
   db.connect(function(err) {
     if (err) throw err;
     const sql = `INSERT INTO ont (slot, porta, sn, state) VALUES ('gpon-onu_1/1/1:1', '1(GPON)', '444753542140AF37', 'online');`
     db.query(sql, function (err, result) {
       if (err) throw err;
-      res.send(`Data inserted into table`)
+      res.send(`Dados inseridos`)
     });
   })
 })
 
-app.get('/fetch', function (req, res) {
+app.get('/mostrar', function (req, res) {
   db.connect(function(err) {
     if (err) throw err;
     const sql = `SELECT * FROM ont`
