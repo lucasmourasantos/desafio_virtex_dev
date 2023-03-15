@@ -21,8 +21,8 @@ docker-compose up --build
 npm start
 
 ## Acessando o back-end
-  http://localhost:3000/conectar
-  http://localhost:3000/criar-db
-  http://localhost:3000/criar-tabela
-  http://localhost:3000/inserir
-  http://localhost:3000/mostrar
+http://localhost:3000/conectar
+http://localhost:3000/criar-db
+http://localhost:3000/criar-tabela
+http://localhost:3000/inserir
+http://localhost:3000/mostrar
